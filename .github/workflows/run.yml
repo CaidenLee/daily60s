@@ -2,8 +2,8 @@ name: Daily60s
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # 每天 UTC 时间 9:00 运行，可根据需要调整
-  workflow_dispatch: # 手动触发工作流
+    - cron: '0 9 * * *'  # 每天 UTC 时间 9:00 运行
+  workflow_dispatch:  # 手动触发
 
 jobs:
   send_news:
@@ -15,6 +15,10 @@ jobs:
     - name: Fetch News
       run: |
         curl -sL https://api.vvhan.com/api/60s > news.txt
+
+    - name: Print news content
+      run: |
+        cat news.txt
 
     - name: Send news to Feishu
       run: |
